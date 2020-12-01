@@ -3,7 +3,7 @@
   const util = require('util')
   const readFile = util.promisify(fs.readFile)
   const data = await readFile(__dirname + '/data.txt')
-  const values = data.toString().trim().split("\n")
+  const values = data.toString().trim().split("\n").map(x => Number(x))
 
   const matchedValues = values.filter(x => hasMatch(x, values))
   const result = matchedValues.reduce((x, y) => x * y)
@@ -11,6 +11,6 @@
 }())
 
 function hasMatch(value, values) {
-  const matchValue = 2020 - Number(value)
-  return values.includes(matchValue.toString())
+  const matchValue = 2020 - value
+  return values.includes(matchValue)
 }
