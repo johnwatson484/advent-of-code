@@ -1,8 +1,6 @@
 (async function () {
-  const fs = require('fs')
   const path = require('path')
-  const util = require('util')
-  const readFile = util.promisify(fs.readFile)
+  const readFile = require('../../utils/read-file')
   const data = await readFile(path.resolve(__dirname, 'data.txt'))
   const values = data.toString().trim().split('\n').map(x => Number(x))
 
