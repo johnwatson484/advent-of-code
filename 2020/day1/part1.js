@@ -11,7 +11,7 @@
   console.log(result)
 }())
 
-function hasMatch (value, values) {
+const hasMatch = (value, values) => {
   const matchValue = 2020 - value
   return values.includes(matchValue)
 }
