@@ -30,5 +30,5 @@ const sled = (course) => {
 }
 
 (async function () {
-  await trackTrees()  
+  await trackTrees()
 }())

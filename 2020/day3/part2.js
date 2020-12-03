@@ -38,5 +38,5 @@ const sled = (course, down, right) => {
 }
 
 (async function () {
-  await trackTrees()  
+  await trackTrees()
 }())

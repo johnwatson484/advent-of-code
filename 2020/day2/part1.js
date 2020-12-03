@@ -13,6 +13,6 @@ const isValid = (min, max, character, password) => {
   return occurences >= min && occurences <= max
 }
 
-(async function () {  
-  await checkValidPasswords()  
+(async function () {
+  await checkValidPasswords()
 }())

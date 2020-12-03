@@ -12,6 +12,6 @@ const checkLocation = (location, character, password) => {
   return password[location - 1] === character
 }
 
-(async function () {  
-  await checkValidPasswords()  
+(async function () {
+  await checkValidPasswords()
 }())

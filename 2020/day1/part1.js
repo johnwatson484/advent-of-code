@@ -14,6 +14,6 @@ const hasMatch = (value, values) => {
   return values.includes(matchValue)
 }
 
-(async function () {  
-  await confirmAccounts()  
+(async function () {
+  await confirmAccounts()
 }())
