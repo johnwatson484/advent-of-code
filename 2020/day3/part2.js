@@ -1,6 +1,8 @@
-(async function () {
-  const path = require('path')
-  const readFile = require('../../utils/read-file')
+const path = require('path')
+const readFile = require('../../utils/read-file')
+const tree = '#'
+
+const trackTrees = async () => {
   const data = await readFile(path.resolve(__dirname, 'data.txt'))
   const course = data.toString().trim().split('\n').map(x => x.trim().split(''))
   const routes = [
@@ -13,9 +15,7 @@
   const treesHit = routes.map(x => sled(course, x[0], x[1]))
   const result = treesHit.reduce((x, y) => x * y)
   console.log(result)
-}())
-
-const tree = '#'
+}
 
 const sled = (course, down, right) => {
   let treesHit = 0
@@ -36,3 +36,7 @@ const sled = (course, down, right) => {
 
   return treesHit
 }
+
+(async function () {
+  await trackTrees()  
+}())
