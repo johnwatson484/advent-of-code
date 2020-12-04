@@ -65,7 +65,7 @@ const validHeight = (passport) => {
 
 const validHairColour = (passport) => {
   const value = getValue(passport, 'hcl')
-  const regex = RegExp('^#([0-9a-fA-F]{6})$')
+  const regex = /^#([0-9a-fA-F]{6})$/
   return regex.test(value)
 }
 
@@ -77,7 +77,7 @@ const validEyeColour = (passport) => {
 
 const validPassportId = (passport) => {
   const value = getValue(passport, 'pid')
-  const regex = RegExp('^([0-9]{9})$')
+  const regex = /^([0-9]{9})$/
   return regex.test(value)
 }
 
