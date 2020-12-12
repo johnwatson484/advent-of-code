@@ -12,25 +12,40 @@ const modelSeats = async () => {
 }
 
 const simulate = (floorPlan) => {
-  let previousOccupiedSeats = 0
+  let totalOccupied = 0
   let noChange = false
 
   while (!noChange) {
-    let totalOccupied = 0
+    const copyPlan = JSON.parse(JSON.stringify(floorPlan))
     for (let i = 0; i < floorPlan.length; i++) {
       for (let j = 0; j < floorPlan[i].length; j++) {
-        if (floorPlan[i][j] === unOccupied && floorPlan[i][j - 1] === unOccupied && floorPlan[i][j + 1] === unOccupied && floorPlan[i + 1][j] === unOccupied && floorPlan[i - 1][j] === unOccupied) {
-          floorPlan[i][j] = occupied
-          totalOccupied += 1
-        } else if (floorPlan[i][j] === occupied && floorPlan[i][j - 1] === occupied && floorPlan[i][j + 1] === occupied && floorPlan[i + 1][j] === occupied && floorPlan[i - 1][j] === occupied) {
-          floorPlan[i][j] = unOccupied
+        const neighbours = []
+        neighbours.push(floorPlan[i][j - 1])
+        neighbours.push(floorPlan[i][j + 1])
+        if (floorPlan[i + 1]) {
+          neighbours.push(floorPlan[i + 1][j])
+          neighbours.push(floorPlan[i + 1][j + 1])
+          neighbours.push(floorPlan[i + 1][j - 1])
+        }
+        if (floorPlan[i - 1]) {
+          neighbours.push(floorPlan[i - 1][j])
+          neighbours.push(floorPlan[i - 1][j + 1])
+          neighbours.push(floorPlan[i - 1][j - 1])
+        }
+        const numberOfNeighbours = neighbours.filter(x => x === occupied).length
+
+        if (floorPlan[i][j] === unOccupied && numberOfNeighbours === 0) {
+          copyPlan[i][j] = occupied
+        } else if (floorPlan[i][j] === occupied && numberOfNeighbours >= 4) {
+          copyPlan[i][j] = unOccupied
         }
       }
     }
-    noChange = previousOccupiedSeats === totalOccupied
-    previousOccupiedSeats = totalOccupied
+    totalOccupied = copyPlan.reduce((x, y) => x + y.filter(z => z === occupied).length, 0)
+    noChange = JSON.stringify(floorPlan) === JSON.stringify(copyPlan)
+    floorPlan = JSON.parse(JSON.stringify(copyPlan))
   }
-  return previousOccupiedSeats
+  return totalOccupied
 }
 
 (async function () {
