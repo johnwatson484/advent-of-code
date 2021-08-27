@@ -21,8 +21,7 @@ const getRules = (values) => {
 }
 
 const parseRule = (rule) => {
-  const ruleValues = rule.replace(/ or/g, '').split(':')[1].trim().split(' ').map(createRuleArray).flat()
-  return ruleValues
+  return rule.replace(/ or/g, '').split(':')[1].trim().split(' ').map(createRuleArray).flat()
 }
 
 const createRuleArray = (rule) => {
