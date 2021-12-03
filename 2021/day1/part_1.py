@@ -4,9 +4,10 @@ data = f.read().splitlines()
 
 lastValue = 0
 increments = 0
+
 for value in data:
   if(value > lastValue):
-    increments+=1
+    increments += 1
   lastValue = value
 
 print(increments)
