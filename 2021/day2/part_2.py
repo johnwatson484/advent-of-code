@@ -8,12 +8,13 @@ aim = 0
 
 for command in commands:
     commandSet = command.split(' ')
+    value = int(commandSet[1])
     if commandSet[0] == 'up':
-        aim -= int(commandSet[1])
+        aim -= value
     elif commandSet[0] == 'down':
-        aim += int(commandSet[1])
+        aim += value
     else:
-        horizontal += int(commandSet[1])
-        depth += (int(commandSet[1]) * aim)
+        horizontal += value
+        depth += (value * aim)
 
 print(depth * horizontal)
