@@ -18,7 +18,6 @@ public static class Part1
             var opponent = GetEntry(entries[0]);
             var me = GetEntry(entries[1]);
             var result = GetResult(opponent, me);
-            Console.WriteLine(result);
             scores.Add(result);
         }
         var total = scores.Sum();
