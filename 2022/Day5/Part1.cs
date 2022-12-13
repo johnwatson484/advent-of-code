@@ -5,22 +5,24 @@ public static class Part1
     {
         var lines = File.ReadAllLines(Path.Combine(Directory.GetCurrentDirectory(), "data.txt"));
 
-        var cratesRows = new List<string>();
-        var i = 0;
-        while (lines[i] != string.Empty)
-        {
-            cratesRows.Add(lines[i]);
-            i++;
-        }
-        cratesRows.RemoveAt(cratesRows.Count - 1);
-        cratesRows.Reverse();
+        var breakIndex = lines.ToList().FindIndex(x => x == string.Empty);
+        var crateRows = lines.Take(breakIndex - 1).ToList();
+        crateRows.Reverse();
 
-        var stackRow = lines[i - 1];
+        var stackRow = lines[breakIndex - 1];
         var stacks = stackRow.Split("   ").Select(x => new Stack<string>()).ToList();
 
         var crateSize = stackRow.Length / stacks.Count + 1;
+        StackCrates(crateRows, stacks, crateSize);
 
-        foreach (var crateRow in cratesRows)
+        var instructions = lines.Skip(breakIndex + 1).ToList();
+        MoveCrates(stacks, instructions);
+        LogTopCrate(stacks);
+    }
+
+    private static void StackCrates(List<string> crateRows, List<Stack<string>> stacks, int crateSize)
+    {
+        foreach (var crateRow in crateRows)
         {
             crateRow.ToCharArray()
             .Select((crate, index) => new
@@ -45,9 +47,10 @@ public static class Part1
             .ToList()
             .ForEach(x => stacks[x.index].Push(x.crate));
         }
+    }
 
-        var instructions = lines.Skip(i + 1).ToList();
-
+    private static void MoveCrates(List<Stack<string>> stacks, List<string> instructions)
+    {
         foreach (var instruction in instructions)
         {
             var instructionParts = instruction.Split(' ');
@@ -60,7 +63,10 @@ public static class Part1
                 stacks[to].Push(stacks[from].Pop());
             }
         }
+    }
 
+    private static void LogTopCrate(List<Stack<string>> stacks)
+    {
         stacks.ForEach(x => Console.Write(x.Pop().Trim().Replace("[", string.Empty).Replace("]", string.Empty)));
         Console.WriteLine();
     }
