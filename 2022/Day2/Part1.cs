@@ -26,20 +26,13 @@ public static class Part1
 
     public static int GetEntry(string entry)
     {
-        switch (entry)
+        return entry switch
         {
-            case "A":
-            case "X":
-                return Rock;
-            case "B":
-            case "Y":
-                return Paper;
-            case "C":
-            case "Z":
-                return Scissors;
-            default:
-                throw new Exception("Invalid entry");
-        }
+            "A" or "X" => Rock,
+            "B" or "Y" => Paper,
+            "C" or "Z" => Scissors,
+            _ => throw new Exception("Invalid entry"),
+        };
     }
 
     public static int GetResult(int opponent, int me)

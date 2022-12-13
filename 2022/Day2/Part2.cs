@@ -26,45 +26,37 @@ public static class Part2
 
     public static int GetOpponentEntry(string entry)
     {
-        switch (entry)
+        return entry switch
         {
-            case "A":
-                return Rock;
-            case "B":
-                return Paper;
-            case "C":
-                return Scissors;
-            default:
-                throw new Exception("Invalid entry");
-        }
+            "A" => Rock,
+            "B" => Paper,
+            "C" => Scissors,
+            _ => throw new Exception("Invalid entry"),
+        };
     }
 
     public static int GetMyEntry(int opponent, string entry)
     {
-        switch (entry)
+        return entry switch
         {
-            case "X":
-                return opponent switch
-                {
-                    Rock => Scissors,
-                    Paper => Rock,
-                    Scissors => Paper,
-                    _ => throw new Exception("Invalid entry")
-                };
-            case "Y":
-                return opponent;
-            case "Z":
-                return opponent switch
-                {
-                    Rock => Paper,
-                    Paper => Scissors,
-                    Scissors => Rock,
-                    _ => throw new Exception("Invalid entry")
+            "X" => opponent switch
+            {
+                Rock => Scissors,
+                Paper => Rock,
+                Scissors => Paper,
+                _ => throw new Exception("Invalid entry")
+            },
+            "Y" => opponent,
+            "Z" => opponent switch
+            {
+                Rock => Paper,
+                Paper => Scissors,
+                Scissors => Rock,
+                _ => throw new Exception("Invalid entry")
 
-                };
-            default:
-                throw new Exception("Invalid entry");
-        }
+            },
+            _ => throw new Exception("Invalid entry"),
+        };
     }
 
     public static int GetResult(int opponent, int me)
