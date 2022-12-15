@@ -72,7 +72,7 @@ public static class Part1
 
     }
 
-    public static int CalculateUnderThreshold(Node node, int depth = 0)
+    public static int CalculateUnderThreshold(Node node)
     {
         int totalSizeUnderThreshold = 0;
         foreach (var child in node.Children)
@@ -82,7 +82,7 @@ public static class Part1
             {
                 totalSizeUnderThreshold += size;
             }
-            totalSizeUnderThreshold += CalculateUnderThreshold(child, depth + 1);
+            totalSizeUnderThreshold += CalculateUnderThreshold(child);
         }
         return totalSizeUnderThreshold;
     }
