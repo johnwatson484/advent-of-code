@@ -16,7 +16,6 @@ public static class Part1
                     || IsVisibleLeft(rows, r, c)
                     || IsVisibleRight(rows, r, c))
                 {
-                    Console.WriteLine(rows[r][c]);
                     visibleTrees.Add($"{r},{c}");
                 }
             }
