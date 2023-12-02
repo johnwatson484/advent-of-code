@@ -17,5 +17,3 @@ for (const line of data) {
   const total = numbers[0] + numbers[numbers.length - 1]
   result += Number(total)
 }
-
-console.log(result)
