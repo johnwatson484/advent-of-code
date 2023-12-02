@@ -6,21 +6,15 @@ let result = 0
 
 for (const line of data) {
   const lineValues = line.split('')
-  let firstNumber
-  let lastNumber
-  for (let i = 0; i < lineValues.length; i++) {
-    if(!isNaN(lineValues[i])) {
-      firstNumber = lineValues[i]
-      break
+  const numbers = []
+
+  for (const char of lineValues) {
+    if (!isNaN(char)) {
+      numbers.push(char)
     }
   }
-  for (let i = lineValues.length; i >= 0; i--) {
-    if(!isNaN(lineValues[i])) {
-      lastNumber = lineValues[i]
-      break
-    }
-  }
-  const total = firstNumber + lastNumber
+
+  const total = numbers[0] + numbers[numbers.length - 1]
   result += Number(total)
 }
 
